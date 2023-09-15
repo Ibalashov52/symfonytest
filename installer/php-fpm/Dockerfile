@@ -45,8 +45,12 @@ RUN chown -R dev:dev /home/dev
 COPY ./application /application
 COPY "installer/php-fpm/php-ini-overrides.ini" "/usr/local/etc/php/conf.d/99-overrides.ini"
 
-RUN mkdir -p /var/www/.config/psysh
-RUN chown 33:33 /var/www/.config/psysh
-RUN chown 33:33 /application/bootstrap/cache
+#RUN mkdir -p /var/www/.config/psysh
+#RUN chown 33:33 /var/www/.config/psysh
+#RUN chown 33:33 /application/bootstrap/cache
+RUN wget https://get.symfony.com/cli/installer -O - | bash
+RUN curl -sS https://get.symfony.com/cli/installer | bash
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
+RUN apt install symfony-cli
 
 USER dev
